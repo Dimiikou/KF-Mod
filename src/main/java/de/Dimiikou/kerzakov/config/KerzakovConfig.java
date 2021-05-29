@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
 @Mod.EventBusSubscriber
 public class KerzakovConfig {
 
+    @Config.Name("ChangeKarmaMessage")
+    @Config.Comment("Stelle ein, ob die Karma nachricht ver\u00e4ndert werden soll.")
+    public static boolean ChangeKarmaMessage = false;
+
     @Config.Name("NametagChanger")
     @Config.Comment("Aktiviere ob du Fraktions und B\u00fcndnissnamen Farblich gekennzeichnet haben m\u00f6chtest.")
     public static boolean NametagChanger = false;
