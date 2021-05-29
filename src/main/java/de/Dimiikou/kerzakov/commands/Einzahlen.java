@@ -26,13 +26,13 @@ public class Einzahlen extends CommandBase implements IClientCommand {
 
     private static AtomicBoolean start = new AtomicBoolean(false);
     private static int money = 0;
-    private static final Pattern REMOVE_PATTERNS = Pattern.compile("^====== ([a-zA-Z0-9_]+)'s Statistiken ======$ " +
+    private static final Pattern REMOVE_PATTERNS = Pattern.compile("^====== ([a-zA-Z0-9_]+)'s Statistiken ======$" +
             "|^  - Level: (\\d+)$" +
             "|^  - Status: ?(Premium|Spieler)$" +
             "|^  - Inventar: (\\d+)/(\\d+)$" +
             "|^  - Wanted Punkte: (\\d+)/69$" +
             "|^  - Geld: (\\d+)\\$$" +
-            "|^  - Verwarnungen: ?(1|2)/3 Warns$" +
+            "|^  - Verwarnungen: ?(0|1|2)/3 Warns$" +
             "|^  - Zeit seit PayDay: (\\d+)/60 Minuten$" +
             "|^  - Experience: (\\d+)/(\\d+) Exp$" +
             "|^  - Fraktion: .+$" +

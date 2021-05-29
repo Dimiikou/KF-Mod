@@ -47,7 +47,7 @@ public class Reichensteuer  extends CommandBase implements IClientCommand {
         if (!(sender instanceof EntityPlayer)) return;
         if (Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase().contains("unicacity.de")) {
             EntityPlayerSP p = Minecraft.getMinecraft().player;
-            if (!started.get()) return;
+            if (started.get()) return;
 
             started.set(true);
 
