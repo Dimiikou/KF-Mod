@@ -1,15 +1,23 @@
 package de.Dimiikou.kerzakov;
 
-import de.Dimiikou.kerzakov.Drugs.Eigenbedarf;
-import de.Dimiikou.kerzakov.Drugs.Gifteigenbedarf;
-import de.Dimiikou.kerzakov.Drugs.giftdrug.GiftGras;
-import de.Dimiikou.kerzakov.Drugs.giftdrug.GiftKoks;
-import de.Dimiikou.kerzakov.Drugs.giftdrug.GiftLSD;
-import de.Dimiikou.kerzakov.Drugs.giftdrug.GiftMeth;
-import de.Dimiikou.kerzakov.Drugs.selldrug.GrasCommand;
-import de.Dimiikou.kerzakov.Drugs.selldrug.KoksCommand;
-import de.Dimiikou.kerzakov.Drugs.selldrug.LSDCommand;
-import de.Dimiikou.kerzakov.Drugs.selldrug.MethCommand;
+import de.Dimiikou.kerzakov.commands.Checkafk;
+import de.Dimiikou.kerzakov.commands.Einzahlen;
+import de.Dimiikou.kerzakov.commands.Reichensteuer;
+import de.Dimiikou.kerzakov.commands.Trainingsmode;
+import de.Dimiikou.kerzakov.commands.drugs.Eigenbedarf;
+import de.Dimiikou.kerzakov.commands.drugs.Gifteigenbedarf;
+import de.Dimiikou.kerzakov.commands.drugs.giftdrug.GiftGras;
+import de.Dimiikou.kerzakov.commands.drugs.giftdrug.GiftKoks;
+import de.Dimiikou.kerzakov.commands.drugs.giftdrug.GiftLSD;
+import de.Dimiikou.kerzakov.commands.drugs.giftdrug.GiftMeth;
+import de.Dimiikou.kerzakov.commands.drugs.selldrug.GrasCommand;
+import de.Dimiikou.kerzakov.commands.drugs.selldrug.KoksCommand;
+import de.Dimiikou.kerzakov.commands.drugs.selldrug.LSDCommand;
+import de.Dimiikou.kerzakov.commands.drugs.selldrug.MethCommand;
+import de.Dimiikou.kerzakov.commands.jobs.ADropMoney;
+import de.Dimiikou.kerzakov.events.AFKEvent;
+import de.Dimiikou.kerzakov.events.DeathEvent;
+import de.Dimiikou.kerzakov.events.KarmaMessage;
 import de.Dimiikou.kerzakov.events.NametagChanger;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -28,6 +36,7 @@ import java.io.File;
 @Mod(modid = Kerzakov.MODID, name = Kerzakov.NAME, version = Kerzakov.VERSION, clientSideOnly = true)
 @SideOnly(Side.CLIENT)
 public class Kerzakov {
+
     public static final String MODID = "kerzakov";
     public static final String NAME = "Kerzakov";
     public static final String VERSION = "1.0.0";
@@ -37,6 +46,9 @@ public class Kerzakov {
 
     public static File config;
     public static int discountDay = 10;
+
+    public static boolean AFK = false;
+    public static boolean DEAD = false;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -59,6 +71,18 @@ public class Kerzakov {
         ClientCommandHandler.instance.registerCommand(new Eigenbedarf());
         ClientCommandHandler.instance.registerCommand(new Gifteigenbedarf());
 
+        ClientCommandHandler.instance.registerCommand(new Checkafk());
+        ClientCommandHandler.instance.registerCommand(new Reichensteuer());
+        ClientCommandHandler.instance.registerCommand(new Einzahlen());
+        ClientCommandHandler.instance.registerCommand(new ADropMoney());
+
+        ClientCommandHandler.instance.registerCommand(new Trainingsmode());
+
+        MinecraftForge.EVENT_BUS.register(new ADropMoney());
         MinecraftForge.EVENT_BUS.register(new NametagChanger());
+        MinecraftForge.EVENT_BUS.register(new AFKEvent());
+        MinecraftForge.EVENT_BUS.register(new DeathEvent());
+        MinecraftForge.EVENT_BUS.register(new KarmaMessage());
+
     }
 }
