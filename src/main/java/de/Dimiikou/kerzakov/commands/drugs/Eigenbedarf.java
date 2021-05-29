@@ -1,4 +1,4 @@
-package de.Dimiikou.kerzakov.Drugs;
+package de.Dimiikou.kerzakov.commands.drugs;
 
 import de.fuzzlemann.ucutils.common.udf.data.faction.drug.DrugQuality;
 import net.minecraft.client.Minecraft;
@@ -53,7 +53,7 @@ public class Eigenbedarf extends CommandBase implements IClientCommand {
                     p.sendChatMessage("/dbank get Koks " + drugamount + " " + koksQuality.getId());
 
                 }
-            }, 1500);
+            }, 1000);
         }
     }
 

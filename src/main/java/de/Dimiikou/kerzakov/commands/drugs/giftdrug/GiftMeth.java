@@ -1,4 +1,4 @@
-package de.Dimiikou.kerzakov.Drugs.giftdrug;
+package de.Dimiikou.kerzakov.commands.drugs.giftdrug;
 
 import com.google.common.collect.Lists;
 import de.Dimiikou.kerzakov.utils.ColorMessage;
@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GiftLSD extends CommandBase implements IClientCommand {
+public class GiftMeth extends CommandBase implements IClientCommand {
+
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
         return false;
@@ -29,7 +30,7 @@ public class GiftLSD extends CommandBase implements IClientCommand {
 
     @Override
     public String getName() {
-        return "giftlsd";
+        return "giftmeth";
     }
 
     @Override
@@ -67,10 +68,10 @@ public class GiftLSD extends CommandBase implements IClientCommand {
                     return;
                 }
 
-                p.sendChatMessage("/selldrug " + player + " LSD " + drugQuality.getId() + " " + amount + " 1");
+                p.sendChatMessage("/selldrug " + player + " Meth " + drugQuality.getId() + " " + amount + " 1");
 
             } else {
-                p.sendMessage(ColorMessage.getMSGwithPrefix("/giftlsd §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
+                p.sendMessage(ColorMessage.getMSGwithPrefix("/giftmeth §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
             }
 
             return;
@@ -94,7 +95,7 @@ public class GiftLSD extends CommandBase implements IClientCommand {
             }
             return CommandBase.getListOfStringsMatchingLastWord(args, playerList);
         }
-        if (args.length == 2) {
+        if (args.length == 3) {
             ArrayList<String> list = new ArrayList<>();
             list.add("0");
             list.add("1");
@@ -104,4 +105,5 @@ public class GiftLSD extends CommandBase implements IClientCommand {
         }
         return new ArrayList();
     }
+
 }

@@ -1,8 +1,11 @@
-package de.Dimiikou.kerzakov.Drugs.giftdrug;
+package de.Dimiikou.kerzakov.commands.drugs.selldrug;
 
 import com.google.common.collect.Lists;
+import de.Dimiikou.kerzakov.Kerzakov;
 import de.Dimiikou.kerzakov.utils.ColorMessage;
 import de.fuzzlemann.ucutils.common.udf.data.faction.drug.DrugQuality;
+import de.fuzzlemann.ucutils.common.udf.data.faction.drug.DrugType;
+import de.fuzzlemann.ucutils.utils.faction.badfaction.drug.DrugUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -17,11 +20,14 @@ import net.minecraftforge.client.IClientCommand;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
-public class GiftKoks extends CommandBase implements IClientCommand {
+public class GrasCommand extends CommandBase implements IClientCommand {
 
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
@@ -30,7 +36,7 @@ public class GiftKoks extends CommandBase implements IClientCommand {
 
     @Override
     public String getName() {
-        return "giftkoks";
+        return "gras";
     }
 
     @Override
@@ -50,10 +56,10 @@ public class GiftKoks extends CommandBase implements IClientCommand {
 
                 if (!(Integer.valueOf(args[2]) >= 0) || !(Integer.valueOf(args[2]) < 4)) {
                     p.sendMessage(ColorMessage.getMSGwithPrefix("§7Bitte gib einen der folgenen Reinheitsgrade an:"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e0"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e1"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e2"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e3"));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e0 §7- §e" + getDrugPrice(DrugQuality.HIGH, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e1 §7- §e" + getDrugPrice(DrugQuality.GOOD, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e2 §7- §e" + getDrugPrice(DrugQuality.MEDIUM, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e3 §7- §e" + getDrugPrice(DrugQuality.BAD, 1)));
                     return;
                 }
 
@@ -68,10 +74,10 @@ public class GiftKoks extends CommandBase implements IClientCommand {
                     return;
                 }
 
-                p.sendChatMessage("/selldrug " + player + " Koks " + drugQuality.getId() + " " + amount + " 1");
+                p.sendChatMessage("/selldrug " + player + " Gras " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
 
             } else {
-                p.sendMessage(ColorMessage.getMSGwithPrefix("/giftkoks §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
+                p.sendMessage(ColorMessage.getMSGwithPrefix("/gras §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
             }
 
             return;
@@ -95,7 +101,7 @@ public class GiftKoks extends CommandBase implements IClientCommand {
             }
             return CommandBase.getListOfStringsMatchingLastWord(args, playerList);
         }
-        if (args.length == 2) {
+        if (args.length == 3) {
             ArrayList<String> list = new ArrayList<>();
             list.add("0");
             list.add("1");
@@ -106,4 +112,15 @@ public class GiftKoks extends CommandBase implements IClientCommand {
         return new ArrayList();
     }
 
+    private static int getDrugPrice(DrugQuality drugQuality, int amount) {
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.GERMAN);
+        Date date = new Date();
+        String dayString = dayFormat.format(date);
+
+        if (dayString.equalsIgnoreCase("samstag")) {
+            return (DrugUtil.getPiecePrice(DrugType.MARIHUANA, drugQuality) - Kerzakov.discountDay) * amount;
+        } else {
+            return DrugUtil.getPiecePrice(DrugType.MARIHUANA, drugQuality) * amount;
+        }
+    }
 }

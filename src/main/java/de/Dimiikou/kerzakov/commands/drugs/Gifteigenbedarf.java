@@ -1,4 +1,4 @@
-package de.Dimiikou.kerzakov.Drugs;
+package de.Dimiikou.kerzakov.commands.drugs;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

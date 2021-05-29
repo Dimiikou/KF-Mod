@@ -1,8 +1,10 @@
-package de.Dimiikou.kerzakov.Drugs.giftdrug;
+package de.Dimiikou.kerzakov.commands.drugs.selldrug;
 
 import com.google.common.collect.Lists;
 import de.Dimiikou.kerzakov.utils.ColorMessage;
 import de.fuzzlemann.ucutils.common.udf.data.faction.drug.DrugQuality;
+import de.fuzzlemann.ucutils.common.udf.data.faction.drug.DrugType;
+import de.fuzzlemann.ucutils.utils.faction.badfaction.drug.DrugUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GiftGras extends CommandBase implements IClientCommand {
+public class LSDCommand extends CommandBase implements IClientCommand {
 
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
@@ -30,7 +32,7 @@ public class GiftGras extends CommandBase implements IClientCommand {
 
     @Override
     public String getName() {
-        return "giftgras";
+        return "lsd";
     }
 
     @Override
@@ -50,10 +52,10 @@ public class GiftGras extends CommandBase implements IClientCommand {
 
                 if (!(Integer.valueOf(args[2]) >= 0) || !(Integer.valueOf(args[2]) < 4)) {
                     p.sendMessage(ColorMessage.getMSGwithPrefix("§7Bitte gib einen der folgenen Reinheitsgrade an:"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e0"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e1"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e2"));
-                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e3"));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e0 §7- §e" + getDrugPrice(DrugQuality.HIGH, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e1 §7- §e" + getDrugPrice(DrugQuality.GOOD, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e2 §7- §e" + getDrugPrice(DrugQuality.MEDIUM, 1)));
+                    p.sendMessage(ColorMessage.getMSG(" §8\u25CF §e3 §7- §e" + getDrugPrice(DrugQuality.BAD, 1)));
                     return;
                 }
 
@@ -68,10 +70,10 @@ public class GiftGras extends CommandBase implements IClientCommand {
                     return;
                 }
 
-                p.sendChatMessage("/selldrug " + player + " Gras " + drugQuality.getId() + " " + amount + " 1");
+                p.sendChatMessage("/selldrug " + player + " LSD " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
 
             } else {
-                p.sendMessage(ColorMessage.getMSGwithPrefix("/giftgras §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
+                p.sendMessage(ColorMessage.getMSGwithPrefix("/lsd §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
             }
 
             return;
@@ -106,4 +108,7 @@ public class GiftGras extends CommandBase implements IClientCommand {
         return new ArrayList();
     }
 
+    private static int getDrugPrice(DrugQuality drugQuality, int amount) {
+        return (DrugUtil.getPiecePrice(DrugType.LSD, drugQuality)) * amount;
+    }
 }

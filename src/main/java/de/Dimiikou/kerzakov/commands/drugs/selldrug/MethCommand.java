@@ -1,4 +1,4 @@
-package de.Dimiikou.kerzakov.Drugs.selldrug;
+package de.Dimiikou.kerzakov.commands.drugs.selldrug;
 
 import com.google.common.collect.Lists;
 import de.Dimiikou.kerzakov.Kerzakov;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
-public class GrasCommand extends CommandBase implements IClientCommand {
+public class MethCommand extends CommandBase implements IClientCommand {
 
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
@@ -36,7 +36,7 @@ public class GrasCommand extends CommandBase implements IClientCommand {
 
     @Override
     public String getName() {
-        return "gras";
+        return "meth";
     }
 
     @Override
@@ -74,10 +74,10 @@ public class GrasCommand extends CommandBase implements IClientCommand {
                     return;
                 }
 
-                p.sendChatMessage("/selldrug " + player + " Gras " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
+                p.sendChatMessage("/selldrug " + player + " Meth " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
 
             } else {
-                p.sendMessage(ColorMessage.getMSGwithPrefix("/gras §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
+                p.sendMessage(ColorMessage.getMSGwithPrefix("/meth §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
             }
 
             return;
@@ -118,9 +118,9 @@ public class GrasCommand extends CommandBase implements IClientCommand {
         String dayString = dayFormat.format(date);
 
         if (dayString.equalsIgnoreCase("samstag")) {
-            return (DrugUtil.getPiecePrice(DrugType.MARIHUANA, drugQuality) - Kerzakov.discountDay) * amount;
+            return (DrugUtil.getPiecePrice(DrugType.METH, drugQuality) - Kerzakov.discountDay) * amount;
         } else {
-            return DrugUtil.getPiecePrice(DrugType.MARIHUANA, drugQuality) * amount;
+            return DrugUtil.getPiecePrice(DrugType.METH, drugQuality) * amount;
         }
     }
 }

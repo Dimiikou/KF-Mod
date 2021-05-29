@@ -1,4 +1,4 @@
-package de.Dimiikou.kerzakov.Drugs.selldrug;
+package de.Dimiikou.kerzakov.commands.drugs.selldrug;
 
 import com.google.common.collect.Lists;
 import de.Dimiikou.kerzakov.Kerzakov;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SideOnly(Side.CLIENT)
-public class LSDCommand extends CommandBase implements IClientCommand {
+public class KoksCommand extends CommandBase implements IClientCommand {
 
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
@@ -36,7 +36,7 @@ public class LSDCommand extends CommandBase implements IClientCommand {
 
     @Override
     public String getName() {
-        return "lsd";
+        return "koks";
     }
 
     @Override
@@ -74,10 +74,10 @@ public class LSDCommand extends CommandBase implements IClientCommand {
                     return;
                 }
 
-                p.sendChatMessage("/selldrug " + player + " LSD " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
+                p.sendChatMessage("/selldrug " + player + " Koks " + drugQuality.getId() + " " + amount + " " + getDrugPrice(drugQuality, amount));
 
             } else {
-                p.sendMessage(ColorMessage.getMSGwithPrefix("/lsd §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
+                p.sendMessage(ColorMessage.getMSGwithPrefix("/koks §7<§eSpielername§7> <§eMenge§7> <§eReinheit§7>§8."));
             }
 
             return;
@@ -113,6 +113,15 @@ public class LSDCommand extends CommandBase implements IClientCommand {
     }
 
     private static int getDrugPrice(DrugQuality drugQuality, int amount) {
-        return (DrugUtil.getPiecePrice(DrugType.LSD, drugQuality)) * amount;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.GERMAN);
+        Date date = new Date();
+        String dayString = dayFormat.format(date);
+
+        if (dayString.equalsIgnoreCase("samstag")) {
+            return (DrugUtil.getPiecePrice(DrugType.COCAINE, drugQuality) - Kerzakov.discountDay) * amount;
+        } else {
+            return DrugUtil.getPiecePrice(DrugType.COCAINE, drugQuality) * amount;
+        }
     }
+
 }
