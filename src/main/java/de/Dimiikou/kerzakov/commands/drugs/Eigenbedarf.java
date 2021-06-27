@@ -18,8 +18,8 @@ import java.util.TimerTask;
 @SideOnly(Side.CLIENT)
 public class Eigenbedarf extends CommandBase implements IClientCommand {
     public static int drugamount = 15;
-    public static DrugQuality koksQuality = DrugQuality.GOOD;
-    public static DrugQuality grasQuality = DrugQuality.GOOD;
+    public static DrugQuality koksQuality = DrugQuality.HIGH;
+    public static DrugQuality grasQuality = DrugQuality.MEDIUM;
 
     @Override
     public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
