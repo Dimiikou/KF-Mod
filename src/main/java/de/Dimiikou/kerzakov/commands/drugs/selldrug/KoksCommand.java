@@ -101,7 +101,7 @@ public class KoksCommand extends CommandBase implements IClientCommand {
             }
             return CommandBase.getListOfStringsMatchingLastWord(args, playerList);
         }
-        if (args.length == 2) {
+        if (args.length == 3) {
             ArrayList<String> list = new ArrayList<>();
             list.add("0");
             list.add("1");
