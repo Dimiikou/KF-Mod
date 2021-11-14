@@ -95,9 +95,10 @@ public class NametagChanger {
 
             if (Faction.getFactionOfPlayer() != null && FactionPlayersList.PLAYER_TO_FACTION_MAP.get(STRIP_PREFIX_PATTERN.matcher(realName).replaceAll("")) == Faction.getFactionOfPlayer()) {
                 color = "\247" + KerzakovConfig.Farbcode;
-            } else if (FactionPlayersList.PLAYER_TO_FACTION_MAP.get(STRIP_PREFIX_PATTERN.matcher(realName).replaceAll("")) == Faction.TRIADS) {
-                color = "\247" + KerzakovConfig.Farbcode;
             }
+            /*else if (FactionPlayersList.PLAYER_TO_FACTION_MAP.get(STRIP_PREFIX_PATTERN.matcher(realName).replaceAll("")) == Faction.TRIADS) {
+                color = "\247" + KerzakovConfig.Farbcode;
+            }*/
 
             if (color == null) {
                 if (name.startsWith("\2477")) continue;
@@ -136,9 +137,10 @@ public class NametagChanger {
 
         if (Faction.getFactionOfPlayer() != null && FactionPlayersList.PLAYER_TO_FACTION_MAP.get(userName) == Faction.getFactionOfPlayer()) {
             return "\247" + KerzakovConfig.Farbcode;
-        } else if (FactionPlayersList.PLAYER_TO_FACTION_MAP.get(userName) == Faction.TRIADS) {
-            return "\247" + KerzakovConfig.Farbcode;
         }
+        /*else if (FactionPlayersList.PLAYER_TO_FACTION_MAP.get(userName) == Faction.TRIADS) {
+            return "\247" + KerzakovConfig.Farbcode;
+        }*/
 
         return null;
     }
