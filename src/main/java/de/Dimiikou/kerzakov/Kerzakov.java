@@ -39,7 +39,7 @@ public class Kerzakov {
 
     public static final String MODID = "kerzakov";
     public static final String NAME = "Kerzakov";
-    public static final String VERSION = "1.0.2";
+    public static final String VERSION = "1.0.3";
     public static String prefix = "\247fKer\2471za\2474kov \2478\u25CF\2477 ";
     private static Logger logger;
     public static Minecraft minecraft = Minecraft.getMinecraft();
